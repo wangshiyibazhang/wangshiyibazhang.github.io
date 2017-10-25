@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javase,collection,List,set,hashset,Treeset," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在javase中我们可以选择用数组来储存数据，但是我们知道数组在创建之后是不能改变其大小，所以我们只能在数组中储存固定长度的数据；相对于数组来说javase中给我们提供了更为方便的储存数据的方式集合。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;集合是一">
+<meta name="keywords" content="javase,collection,List,set,hashset,Treeset">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合(1)">
+<meta property="og:url" content="http://yoursite.com/2017/10/11/javase-collection/index.html">
+<meta property="og:site_name" content="����һ����">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在javase中我们可以选择用数组来储存数据，但是我们知道数组在创建之后是不能改变其大小，所以我们只能在数组中储存固定长度的数据；相对于数组来说javase中给我们提供了更为方便的储存数据的方式集合。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;集合是一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ox8t0ws1t.bkt.clouddn.com/image/collection/%E9%9B%86%E5%90%88%E5%85%B3%E7%B3%BB%E5%9B%BE1.png">
+<meta property="og:updated_time" content="2017-10-11T11:55:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="集合(1)">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在javase中我们可以选择用数组来储存数据，但是我们知道数组在创建之后是不能改变其大小，所以我们只能在数组中储存固定长度的数据；相对于数组来说javase中给我们提供了更为方便的储存数据的方式集合。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;集合是一">
+<meta name="twitter:image" content="http://ox8t0ws1t.bkt.clouddn.com/image/collection/%E9%9B%86%E5%90%88%E5%85%B3%E7%B3%BB%E5%9B%BE1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/11/javase-collection/"/>
+
+
+
+
+
+
+  <title>集合(1) | ����һ����</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://github.com/wangshiyibazhang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">����һ����</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">����Ϊ�ˣ��úû���</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/11/javase-collection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="һ����">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="����һ����">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">集合(1)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-11T17:54:28+08:00">
+                2017-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javase/" itemprop="url" rel="index">
+                    <span itemprop="name">javase</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在javase中我们可以选择用数组来储存数据，但是我们知道数组在创建之后是不能改变其大小，所以我们只能在数组中储存固定长度的数据；相对于数组来说javase中给我们提供了更为方便的储存数据的方式集合。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;集合是一种容器用来存放一种数目不固定的数据，集合满了之后可以自动扩充，而且只能存放引用类型的数据，不能存放基本类型的数据，对于基本类型的数组，存放基本类型数据后会自动装箱。<br></p>
+<a id="more"></a>
+<p> 对集合的操作就是增，删，改，查，遍历<br><br>规定集合中只能装String类型数据，这就叫做泛型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set&lt;String&gt; set = new HashSet&lt;String&gt;();</div></pre></td></tr></table></figure></p>
+<p><br><br>首先我给出一个集合中的层次关系图：<br><br>注意：实现代表继承，虚线代表实现接口<br><br><img src="http://ox8t0ws1t.bkt.clouddn.com/image/collection/%E9%9B%86%E5%90%88%E5%85%B3%E7%B3%BB%E5%9B%BE1.png" alt=""><br><br>通过上图我们可以看到collection为根接口;</p>
+<p></p><h2>Set</h2><p></p>
+<p><ul></ul></p>
+<p><li><br>在set集合中规定存放的数据的无序且不可重复的</li></p>
+<p><li>set中添加数据的不可重复是指添加对象内容的不可重复，并不是值对象引用的不可重复</li><br></p>
+<p></p><h5>hashset</h5><br>&nbsp;&nbsp;&nbsp;&nbsp;在hashset中直接实现了set接口，那么hashset是如何保证数据的不可重复性的？<br><br><p></p>
+<p><ol><br>    <li>将一个对象给hashset()中添加的时候，hashset自动调用该对象的hashcode()；给hashset()中添加第一个数据的时候它调用hashcode()方法得到一个int值num1,然后hashset()将得到的这个num1就进行了一系列的操作得到了一个num2，然后用num2%16，最后得到的这个结果就是hashset集合索引的位置，然后hashset就将这个数组放到了这个位置；</li><br>    <li>当hashcode不同的时候，数据直接进入集合；当hashcode相同的时候，hashset()就会再次调用equals()，当equals返回true的时候不让对象进入集合，当返回false时，数据进入集合并以链表的方式尽心保存</li><br>    <li>hashset()，就是用以上方法保证数据无序的进入集合中的</li></ol></p>
+<p><li>向hashset()中添加，查询和删除数据都会比较它的规则，即调用equals()和hashcode()方法；</li></p>
+<p><li>如果要将一个对象加入hashset集合中就必须在这个对象中重写hashcode和equals方法；</li><br><br>以下就是在类中覆盖equals()和hashcode()的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">     public boolean equals(Object obj )&#123;</div><div class="line">	 if(this ==  obj)&#123;</div><div class="line">	   	 return true;</div><div class="line">	 &#125;</div><div class="line">	 if(obj instanceof Course)&#123;</div><div class="line">		Course c = (Course) obj;</div><div class="line">		if(this.name == c.name)&#123;</div><div class="line">			return true;</div><div class="line">		&#125;</div><div class="line">	 &#125;</div><div class="line">	 return false;</div><div class="line">      &#125;</div><div class="line">    //重写hashcode（）方法时找到一个与该对象相关的int值相加后的结果乘以31</div><div class="line">     public int hashCode()&#123;</div><div class="line">	  return name.hashCode()*31;</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p><br><br><b>注意:<br>1.覆盖equals()的时候可以不覆盖hashcode();覆盖hashcode()的时候必须覆盖equals();通常情况下两个是一起覆盖的，覆盖hashcode/equals的时候要遵照相同的规则（比如：忽略大小写时要同步）；<br>2.hashcode(),通常是指地址编号，equals()通常是指，对象所取得的值<br>3.重写hashcode（）方法时找到一个与该对象相关的int值相加后的结果乘以31，得出的结果比较接近hashcode（）算法得到的值；</b></p>
+<p><hr></p>
+<p></p><h5>TreeSet</h5><br>&nbsp;&nbsp;&nbsp;&nbsp;TreeSet可以保证数据的不可重复并且可以对数据进行排序；<br>&nbsp;&nbsp;&nbsp;&nbsp;当我们要将一个对象类型的数据添加到TreeSet中的时候，该对象中就必须实现Comparable接口，并实现其中的compareto方法，并且在这个方法中实现学生数据的排序规则；<br>&nbsp;&nbsp;&nbsp;&nbsp;当我们要将数据添加到TreeSet中的时候，TreeSet就会自动调用对象中的compareto方法进行比较，如果返回值为0时，就不让数据进入集合，然后根据返回的正数/负数，对数据进行正序/倒叙的排序<br><font color="red">TreeSet就是通过以上方法保证数据的不可重复和可排序的</font><br><br>&nbsp;&nbsp;&nbsp;&nbsp;TreeSet实现的方法有两种：<br>a.学生对象自带的比较器就是在学生对象中覆盖compareTo方法，<br>b.重新定义一个比较器类在TreeSet中之间new；<br><br><p></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">//以下就是再类中覆盖的compareto方法</div><div class="line">@Override</div><div class="line">public int compareTo(Student o) &#123;</div><div class="line">	if(this.age &gt;o.age)&#123;</div><div class="line">		return 1;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	if(this.age == o.age)&#123;</div><div class="line">		return 0;</div><div class="line">	&#125;</div><div class="line">	if(this.age &lt;o.age)&#123;</div><div class="line">		return -1;</div><div class="line">	&#125;</div><div class="line">  if(this.name.compareTo(o.name)&gt;0)&#123;</div><div class="line">	  return 1;</div><div class="line">  &#125;</div><div class="line">  if(this.name.compareTo(o.name)==0)&#123;</div><div class="line">	  return 0;</div><div class="line">  &#125;</div><div class="line">  if(this.name.compareTo(o.name)&lt;0)&#123;</div><div class="line">	  return -1;</div><div class="line">  &#125;</div><div class="line">  return 0;</div><div class="line">&#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+
+<p></p><h2>List</h2><br>&nbsp;&nbsp;&nbsp;&nbsp;List中存放的是有序的可重复的数据；<br><br>&nbsp;&nbsp;&nbsp;&nbsp;数组在内存中是一块连续的内存空间，数组在添加数据的时候需要频繁的移动内存；数组添加删除数据比链表添加删除数据慢，数组查询数据比链表快；<p></p>
+<p></p><h5>ArrayList</h5><br>&nbsp;&nbsp;&nbsp;&nbsp;ArrayList就是通过数组的方式实现数据的增删查改；  <p></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; list = new ArrayList&lt;String&gt;();</div><div class="line">    	//添加数据</div><div class="line">    	list.add(&quot;hello1&quot;);</div><div class="line">    	list.add(&quot;hello2&quot;);</div><div class="line">    	list.add(&quot;hello3&quot;);</div><div class="line">    	list.add(&quot;hello4&quot;);</div><div class="line">    	list.add(&quot;hello5&quot;);</div><div class="line">    	list.add(&quot;hello6&quot;);</div><div class="line">    	list.add(1,&quot;添加数据&quot;);</div><div class="line">    	//修改数据</div><div class="line">    	list.set(1, &quot;修改数据&quot;);</div><div class="line">    	//删除数据</div><div class="line">    	String str = list.remove(1);</div><div class="line">    	System.out.println(&quot;被删除的数据是：&quot;+str);</div><div class="line">    	//查询数据</div><div class="line">    	int index = list.indexOf(&quot;hello4&quot;);</div><div class="line">    	if(index &gt;=0)&#123;</div><div class="line">    		System.out.println(&quot;hello4所在的索引位置是：&quot;+index);</div><div class="line">    	&#125;	</div><div class="line">    	//遍历数组</div><div class="line">    	Iterator&lt;String&gt; it = list.iterator();</div><div class="line">    	while(it.hasNext())&#123;</div><div class="line">    		String str2 = it.next();</div><div class="line">    		System.out.println(str2);</div><div class="line">    	&#125;</div></pre></td></tr></table></figure>
+<hr>
+
+<p>*LinkedList是通过链表的方式来实现的（链表在添加删除的时候不需要频繁移动内存）；</p>
+<hr>
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; list = new LinkedList&lt;String&gt;();        </div><div class="line">   	//添加数据</div><div class="line">   	list.add(&quot;hello1&quot;);</div><div class="line">   	list.add(&quot;hello2&quot;);</div><div class="line">   	list.add(&quot;hello3&quot;);</div><div class="line">   	list.add(&quot;hello4&quot;);</div><div class="line">   	list.add(&quot;hello5&quot;);</div><div class="line">   	list.add(&quot;hello6&quot;);</div><div class="line">   	list.add(1,&quot;添加数据&quot;); 	</div><div class="line">   	//修改数据</div><div class="line">   	list.set(1, &quot;修改数据&quot;);</div><div class="line">   	//删除数据</div><div class="line">   	String str = list.remove(1);</div><div class="line">   	System.out.println(&quot;被删除的数据是：&quot;+str);</div><div class="line">   	//查询数据</div><div class="line">   	int index = list.indexOf(&quot;hello4&quot;);</div><div class="line">   	if(index &gt;=0)&#123;</div><div class="line">   		System.out.println(&quot;hello4所在的索引位置是：&quot;+index);</div><div class="line">   	&#125;</div><div class="line">   	//遍历数组</div><div class="line">   	Iterator&lt;String&gt; it = list.iterator();</div><div class="line">   	while(it.hasNext())&#123;</div><div class="line">   		String str2 = it.next();</div><div class="line">   		System.out.println(str2);</div><div class="line">   	&#125;</div></pre></td></tr></table></figure>
+<p>*Vector也是采用数组来实现的，代码和上面的都差不多；<br><br>注意：<br>1.jdk包中的stack由于它是继承了Vector的方法，在Vector中有直接利用索引删除数据的方法indexof()，而stack也继承了这个方法，所以说不能直接用这个栈；<br>2.List 接口除了可以通过Iterator进行迭代之外还提供了特殊的迭代器ListIterator，除了允许 Iterator 接口提供的正常操作外，该迭代器还允许元素插入和替换，以及双向访问。还提供了一个方法来获取从列表中指定位置开始的列表迭代器。</p>
+<p><hr></p>
+<p><font size="5px" color="blue">集合的删除：</font>在遍历集合的过程中，尽量不要通过集合的remove（），来删除数据，这样会导致集合状态和迭代器的状态不一致，如果删除后再次遍历集合会出现异常，所以一旦采用了集合的remove（）方法删除，那么就必须用return来中断循环；在遍历集合的过程中，可以使用迭代器的remove（），来删除数据；</p>
+<p><hr><br>ps:以上就是我对集合中set分支的总结以及一些注意事项，有空我也会将map的内容进行相关的梳理</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，小菜鸡感谢您的支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="һ���� WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+    <div>
+	  
+	    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------the artical is over
+            <i class="fa fa-paw"></i>
+            thank your readed-------------
+        </div>
+    
+</div>
+	  
+    </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javase/" rel="tag"><i class="fa fa-tag"></i> javase</a>
+          
+            <a href="/tags/collection/" rel="tag"><i class="fa fa-tag"></i> collection</a>
+          
+            <a href="/tags/List/" rel="tag"><i class="fa fa-tag"></i> List</a>
+          
+            <a href="/tags/set/" rel="tag"><i class="fa fa-tag"></i> set</a>
+          
+            <a href="/tags/hashset/" rel="tag"><i class="fa fa-tag"></i> hashset</a>
+          
+            <a href="/tags/Treeset/" rel="tag"><i class="fa fa-tag"></i> Treeset</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/07/javase-normalclass/" rel="next" title="java常用类与对象池">
+                <i class="fa fa-chevron-left"></i> java常用类与对象池
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/14/C-S与B-S系统架构/" rel="prev" title="C/S与B/S系统架构">
+                C/S与B/S系统架构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE0NS83Njk0"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/touxiang.jpg"
+               alt="һ����" />
+          <p class="site-author-name" itemprop="name">һ����</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wangsrbus.cn" title="wangsrbus的博客" target="_blank">wangsrbus的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://aluckycoder.github.io" title="aluckycoder的博客" target="_blank">aluckycoder的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">hashset</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">TreeSet</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">List</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">ArrayList</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy;  Wed Sep 27 2017 08:00:00 GMT+0800 (中国标准时间) - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">һ����</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+<div class="powered-by">
+  
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+<div class="theme-info">
+   
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  
+   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+   </script>
+   <script type="text/javascript" src="/js/src/love.js"></script>
+  
+</body>
+</html>
