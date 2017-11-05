@@ -101,7 +101,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="javase,常用类," />
+  <meta name="keywords" content="servlet,requestDispatcher,sendRedirect," />
 
 
 
@@ -117,18 +117,18 @@
 
 
 
-<meta name="description" content="常用类     在java中方法是对象的，属性是没有方法的，基本类型的变量只代表一个数值、字符、true/false;对象又要通过引用类型来调用      java给8种基本类型提供了对应的引用类型称为包装器类：byte(Byte),int(Integer),short(Short),long(Long),float(Float),double(Double),char(character),bo">
-<meta name="keywords" content="javase,常用类">
+<meta name="description" content="ps:在servlet程序中有时我们提供给访问者的资源不仅仅是局限于当前web目录下的，当我们需要访问不同目录或者不同站点的资源时，我们可以通过请求转发和请求重定向来实现该操作 请求转发&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在servlet引擎中定义了RequestDispatcher接口用于分装一个被访问的资源，该接口中分别提供了forw">
+<meta name="keywords" content="servlet,requestDispatcher,sendRedirect">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java常用类与对象池">
-<meta property="og:url" content="http://yoursite.com/2017/10/07/javase-normalclass/index.html">
+<meta property="og:title" content="请求重定向与请求转发">
+<meta property="og:url" content="http://yoursite.com/2017/11/05/请求重定向与请求转发/index.html">
 <meta property="og:site_name" content="王氏一巴掌">
-<meta property="og:description" content="常用类     在java中方法是对象的，属性是没有方法的，基本类型的变量只代表一个数值、字符、true/false;对象又要通过引用类型来调用      java给8种基本类型提供了对应的引用类型称为包装器类：byte(Byte),int(Integer),short(Short),long(Long),float(Float),double(Double),char(character),bo">
+<meta property="og:description" content="ps:在servlet程序中有时我们提供给访问者的资源不仅仅是局限于当前web目录下的，当我们需要访问不同目录或者不同站点的资源时，我们可以通过请求转发和请求重定向来实现该操作 请求转发&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在servlet引擎中定义了RequestDispatcher接口用于分装一个被访问的资源，该接口中分别提供了forw">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-08T00:16:46.000Z">
+<meta property="og:updated_time" content="2017-11-05T10:58:34.023Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java常用类与对象池">
-<meta name="twitter:description" content="常用类     在java中方法是对象的，属性是没有方法的，基本类型的变量只代表一个数值、字符、true/false;对象又要通过引用类型来调用      java给8种基本类型提供了对应的引用类型称为包装器类：byte(Byte),int(Integer),short(Short),long(Long),float(Float),double(Double),char(character),bo">
+<meta name="twitter:title" content="请求重定向与请求转发">
+<meta name="twitter:description" content="ps:在servlet程序中有时我们提供给访问者的资源不仅仅是局限于当前web目录下的，当我们需要访问不同目录或者不同站点的资源时，我们可以通过请求转发和请求重定向来实现该操作 请求转发&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在servlet引擎中定义了RequestDispatcher接口用于分装一个被访问的资源，该接口中分别提供了forw">
 
 
 
@@ -157,14 +157,14 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/07/javase-normalclass/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/05/请求重定向与请求转发/"/>
 
 
 
 
 
 
-  <title>java常用类与对象池 | 王氏一巴掌</title>
+  <title>请求重定向与请求转发 | 王氏一巴掌</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/07/javase-normalclass/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/05/请求重定向与请求转发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="一巴掌">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java常用类与对象池</h1>
+          <h1 class="post-title" itemprop="name headline">请求重定向与请求转发</h1>
         
 
         <div class="post-meta">
@@ -347,8 +347,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-07T15:58:57+08:00">
-                2017-10-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-05T17:31:11+08:00">
+                2017-11-05
               </time>
             
 
@@ -370,8 +370,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javase/" itemprop="url" rel="index">
-                    <span itemprop="name">javase</span>
+                  <a href="/categories/javaWeb/" itemprop="url" rel="index">
+                    <span itemprop="name">javaWeb</span>
                   </a>
                 </span>
 
@@ -407,15 +407,15 @@
       
 
       
-        <p></p><h2>常用类</h2><p></p>
-<p><ul><br>    <li>在java中方法是对象的，属性是没有方法的，基本类型的变量只代表一个数值、字符、true/false;对象又要通过引用类型来调用<br>  </li><br>    <li>java给8种基本类型提供了对应的引用类型称为包装器类：byte(Byte),int(Integer),short(Short),long(Long),float(Float),double(Double),char(character),boolean(Boolean);包装器是为了将8种数据类型能进行再对象上面的操作</li><br>    <li>任何基本类型遇到字符串结果都是字符串</li><br>    <li>两个Integer类型相加时会进行自动拆箱成int，如果返回类型为int时又会自动装箱，也就是Integer可以直接当做int类型使用</li><br></ul><br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public  static  void  test1()&#123;</div><div class="line">		//int 转换成Integer 的操作</div><div class="line">		int i = 10;</div><div class="line">		Integer j =  new Integer(i);</div><div class="line">		Integer k = Integer.valueOf(i);</div><div class="line">		Integer m = i;//JVM自动转换</div><div class="line">		</div><div class="line">		//Integer 转换成 int 的操作</div><div class="line">     //	int h = x;//JVM自动转换	</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
-<p></p><h5>数值的精确运算</h5><br>进行精确运算时应该将一个double转换成字符串然后将字符串转换成BigDecimal类型进行运算<p></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//精确的除法运算</div><div class="line">	public static double test2(double x1,double x2,int fale)&#123;</div><div class="line">	//fale参数表示精确到小数点后的位数</div><div class="line">      if(fale&lt;0)&#123;</div><div class="line">			throw new IllegalArgumentException();</div><div class="line">		&#125;</div><div class="line">		BigDecimal b1 = new BigDecimal(Double.toString(x1));</div><div class="line">		BigDecimal b2 = new BigDecimal(Double.toString(x2));</div><div class="line">		return b1.divide(b2, fale, BigDecimal.ROUND_HALF_UP).doubleValue();</div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<p></p><h5>格式化数值</h5><br>格式化数值之前首先应该建立模板，可以通过相应的API文档查看用法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int value = 1332164648.123;</div><div class="line">DecifalFormat df1 = new DecifalFormat(&quot;000,000,000,000,000.000&quot;);//表示没有数值时强制显示0，有数值显示数值；</div><div class="line">DecifalFormat df1 = new DecifalFormat(&quot;###,###,###,###.###)；//表示有数值显示数值没数值就不显示；</div><div class="line">String str = df1.format（value）；</div></pre></td></tr></table></figure><p></p>
-<p><hr></p>
-<p></p><h2>对象池</h2><br>在java中只要用到“ ”，来创建字符串对象，则该对象均会在对象池中出现，对象池是共享的，字符串底层实际就是char组成的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//以下代码创建了两个对象，一个对象池中，一个堆中；</div><div class="line">	  String str = new String(&quot;Hello&quot;);</div><div class="line">     //以下代码创建了3个对象，一个对象池，两个堆中</div><div class="line">	  String str1 = new String(&quot;Hello&quot;);</div><div class="line">	  String str2 = new String(&quot;Hello&quot;);</div><div class="line">     *字符串对象一旦创建好其内容就不可改变</div><div class="line">     //用这种拼接字符串的方式，如果拼接少量字符串比较方便  但是拼接大量字符串时会造成大量垃圾</div><div class="line">	  String str3 = &quot;Hello&quot;;</div><div class="line">	  str3  = str3 +  &quot;world&quot;;</div></pre></td></tr></table></figure><p></p>
-<p>字符串对象可以比较大小，也就是为字符串对象排序做好准备（compareTo）；</p>
+        <p>ps:在servlet程序中有时我们提供给访问者的资源不仅仅是局限于当前web目录下的，当我们需要访问不同目录或者不同站点的资源时，我们可以通过请求转发和请求重定向来实现该操作</p>
+<p></p><h2>请求转发</h2><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在servlet引擎中定义了RequestDispatcher接口用于分装一个被访问的资源，该接口中分别提供了forward（请求转发到被RequestDispatcher分装的资源中）和include（将RequestDispatcher分装的资源作为相应内容包含起来）方法。<br><p></p>
+<a id="more"></a>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>RequestDispatcher对象获取方法</b> </p>
+<ol><br>    <li>ServletContext.getRequestDispatcher方法，该方法传递的参数是要访问的资源的指定路径，而且必须是以“/”开头，代表当前web根目录</li><br>    <li>ServletRequest.getRequestDispatcher方法，该方法传递的参数也是要访问的资源的指定路径，较之于ServeletContext对象提供的方法，该方法的参数不必硬性要求是以“/”</li><br></ol>以上两个方法所返回值均为RequestDispatcher对象，且该对象只能实现在同一个web站点中请求转发。<br><ul><b>注意</b><br>    <li>include方法会将RequestDispatcher对象中的资源当做当前响应消息包含进来，但是当包含信息中含有改变响应头信息的代码时会被忽略不执行</li><br>    <li>forward方法会将servlet引擎中缓存的内容输出给客户端，而通过forward写入缓存区的内容将会被忽略，但是程序代码还是要执行的</li><br></ul><br><h2>请求重定向</h2><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServletResponse对象提供了sendRedirect方法用于实现重定向功能，该方法会生成302响应码和Location响应头，通知客户端访问Location中带过去的URL地址，URL地址还可以是一个绝对的URL地址。<br><br><ol><br><b>重定向的特点：</b><br> <li>浏览器会向服务器发送两次，意味着有两个response/resquest</li><br> <li>用重定向浏览器地址栏会发生变化</li><br></ol>
 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">   发送302状态码让服务器找其他网页 	</div><div class="line">response.setStatus(302);</div><div class="line">设置请求头，并指定转向网页的地址</div><div class="line">response.setHeader(&quot;location&quot;, &quot;/web02/register.xhtml&quot;);</div><div class="line">      */</div><div class="line"></div><div class="line">//和以上代码有同功之效</div><div class="line">response.sendRedirect(&quot;/web02/register.xhtml&quot;);</div></pre></td></tr></table></figure>
+<p></p><h3>请求转发和重定向的区别</h3><p></p>
+<ol><br>    <li>请求转发只能访问同一个web应用中的资源，请求重定向不止可以访问同一个web应用中的资源还可以访问其他web应用中的资源，</li><br>    <li>当传入的地址都以“/”开头时，请求转发中代表的当前web应用程序的跟目录，重定向代表整个web站点的根目录</li><br>    <li>请求转发地址栏不会发生改变，请求重定向地址栏发生改变</li><br>    <li>请求转发整个过程中只有一个request和response对象，请求重定向则有多个request和response对象</li><br></ol>
       
     </div>
     
@@ -468,9 +468,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javase/" rel="tag"><i class="fa fa-tag"></i> javase</a>
+            <a href="/tags/servlet/" rel="tag"><i class="fa fa-tag"></i> servlet</a>
           
-            <a href="/tags/常用类/" rel="tag"><i class="fa fa-tag"></i> 常用类</a>
+            <a href="/tags/requestDispatcher/" rel="tag"><i class="fa fa-tag"></i> requestDispatcher</a>
+          
+            <a href="/tags/sendRedirect/" rel="tag"><i class="fa fa-tag"></i> sendRedirect</a>
           
         </div>
       
@@ -483,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/07/javase2-Array/" rel="next" title="数组">
-                <i class="fa fa-chevron-left"></i> 数组
+              <a href="/2017/11/01/servlet-4-Rrequest-Session和Cookie/" rel="next" title="servlet(4)-Rrequest,Session和Cookie">
+                <i class="fa fa-chevron-left"></i> servlet(4)-Rrequest,Session和Cookie
               </a>
             
           </div>
@@ -492,10 +494,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/11/javase-collection/" rel="prev" title="集合(1)">
-                集合(1) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -672,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">常用类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">数值的精确运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">格式化数值</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">对象池</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">请求转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">请求重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">请求转发和重定向的区别</span></a></li></ol></li></ol></div>
             
 
           </div>
