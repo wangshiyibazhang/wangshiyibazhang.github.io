@@ -101,7 +101,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo,github,Error," />
+  <meta name="keywords" content="JDBC,mysql,java," />
 
 
 
@@ -117,18 +117,18 @@
 
 
 
-<meta name="description" content="部署时出现的错误  今天在优化完主题，部署的时候不知道为什么突然间出现了无法连接到远程仓库的错误，如下所示12345FATAL Something&amp;apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: Authentication failed.fatal">
-<meta name="keywords" content="hexo,github,Error">
+<meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数据库可以帮我们方便的组织、储存和管理数据；我们在开发过程中也会操作大量的数据，通过单独的操作数据库会带来很大的不便，因此sun公司提供了一套专门用于执行SQL语句的API 即JDBC。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在通过java程序操作">
+<meta name="keywords" content="JDBC,mysql,java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="错误共享">
-<meta property="og:url" content="http://yoursite.com/2017/09/28/hexoError01/index.html">
+<meta property="og:title" content="JDBC">
+<meta property="og:url" content="http://yoursite.com/2017/11/09/JDBC/index.html">
 <meta property="og:site_name" content="王氏一巴掌">
-<meta property="og:description" content="部署时出现的错误  今天在优化完主题，部署的时候不知道为什么突然间出现了无法连接到远程仓库的错误，如下所示12345FATAL Something&amp;apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: Authentication failed.fatal">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数据库可以帮我们方便的组织、储存和管理数据；我们在开发过程中也会操作大量的数据，通过单独的操作数据库会带来很大的不便，因此sun公司提供了一套专门用于执行SQL语句的API 即JDBC。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在通过java程序操作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-30T02:59:18.000Z">
+<meta property="og:updated_time" content="2017-11-09T12:19:04.013Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="错误共享">
-<meta name="twitter:description" content="部署时出现的错误  今天在优化完主题，部署的时候不知道为什么突然间出现了无法连接到远程仓库的错误，如下所示12345FATAL Something&amp;apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.htmlError: Authentication failed.fatal">
+<meta name="twitter:title" content="JDBC">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;数据库可以帮我们方便的组织、储存和管理数据；我们在开发过程中也会操作大量的数据，通过单独的操作数据库会带来很大的不便，因此sun公司提供了一套专门用于执行SQL语句的API 即JDBC。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在通过java程序操作">
 
 
 
@@ -157,14 +157,14 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/28/hexoError01/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/09/JDBC/"/>
 
 
 
 
 
 
-  <title>错误共享 | 王氏一巴掌</title>
+  <title>JDBC | 王氏一巴掌</title>
   
 
 
@@ -318,7 +318,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/28/hexoError01/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/JDBC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="一巴掌">
@@ -335,7 +335,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">错误共享</h1>
+          <h1 class="post-title" itemprop="name headline">JDBC</h1>
         
 
         <div class="post-meta">
@@ -347,8 +347,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-28T18:16:05+08:00">
-                2017-09-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T19:18:45+08:00">
+                2017-11-09
               </time>
             
 
@@ -370,8 +370,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ERROR/" itemprop="url" rel="index">
-                    <span itemprop="name">ERROR</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -407,21 +407,16 @@
       
 
       
-        <p></p><h2>部署时出现的错误</h2><p></p>
-<blockquote>
-<p>今天在优化完主题，部署的时候不知道为什么突然间出现了无法连接到远程仓库的错误，如下所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FATAL Something&apos;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</div><div class="line">Error: Authentication failed.</div><div class="line">fatal: Could not read from remote repository.</div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div></pre></td></tr></table></figure></p>
-</blockquote>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据库可以帮我们方便的组织、储存和管理数据；我们在开发过程中也会操作大量的数据，通过单独的操作数据库会带来很大的不便，因此sun公司提供了一套专门用于执行SQL语句的API 即JDBC。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在通过java程序操作数据库的时候最好是确定已经你已经创建了响应的数据库和表；<br></p>
 <a id="more"></a>
-<p>于是在伟大的firefox查询了好久，但还是没有具体弄明白究竟是怎么回事，于是我就在git上重新生成密钥，语法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;574844241@qq.com&quot;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>然后在<a href="https://github.com/settings/keys" target="_blank" rel="external">github</a>上又new SSH KEY ，将C:/用户/user/id_rsa.pub中的内容添加在new出来的key中了；然后通过以下语法测试</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure>
-<blockquote>
-<p>出现”Hi wangshiyibazhang! You’ve successfully authenticated, but GitHub does not provide shell access.”的提示就ok了！</p>
-</blockquote>
-<p>不过我今天将域名已经配置好了，嘻嘻。。。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里我将使用以下数据库和表：<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">create database db;</div><div class="line">use db;</div><div class="line">create table student(</div><div class="line">	id int primary key,</div><div class="line">	name varchar(40) not null,</div><div class="line">	age int,</div><div class="line">	Sdept varchar(40)</div><div class="line">	);</div><div class="line">insert into student(id,name,age,Sdept) values(&quot;1&quot;,&quot;aaa&quot;,&quot;20&quot;,&quot;AAA&quot;);</div><div class="line">insert into student(id,name,age,Sdept) values(&quot;2&quot;,&quot;bbb&quot;,&quot;21&quot;,&quot;BBB&quot;);</div></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div></pre></td><td class="code"><pre><div class="line">package JDBC;</div><div class="line"></div><div class="line">import java.sql.Connection;</div><div class="line">import java.sql.DriverManager;</div><div class="line">import java.sql.ResultSet;</div><div class="line">import java.sql.SQLException;</div><div class="line">import java.sql.Statement;</div><div class="line">import java.util.ResourceBundle;</div><div class="line"></div><div class="line">public class JdbcTest &#123;</div><div class="line"></div><div class="line">	private static String className;</div><div class="line">	private static String url;</div><div class="line">	private static String user;</div><div class="line">	private static String password;</div><div class="line">	/*</div><div class="line">	 * 通过静态代码块读取数据库配置文件中的信息</div><div class="line">	 */</div><div class="line">	static&#123;</div><div class="line">		ResourceBundle rb = ResourceBundle.getBundle(&quot;my&quot;);</div><div class="line">		className = rb.getString(&quot;className&quot;);</div><div class="line">		url = rb.getString(&quot;url&quot;);</div><div class="line">		user = rb.getString(&quot;user&quot;);</div><div class="line">		password = rb.getString(&quot;password&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void Updata()&#123;</div><div class="line">		Connection conn = null;</div><div class="line">		Statement st1 = null;</div><div class="line">		PreparedStatement st2 = null;</div><div class="line">		ResultSet rs = null;</div><div class="line">		try &#123;</div><div class="line">			//获取数据库驱动</div><div class="line">			Class.forName(className);</div><div class="line">			System.out.println(&quot;数据库驱动成功！&quot;);</div><div class="line">			//连接数据库</div><div class="line">			conn = DriverManager.getConnection(url,user,password);</div><div class="line">			System.out.println(&quot;数据库连接成功&quot;);</div><div class="line">			//创建一个数据操作类</div><div class="line">			st = conn.createStatement();</div><div class="line">			//查询数据</div><div class="line">			String sql = &quot;select * from student&quot;;</div><div class="line">			//获取结果集</div><div class="line">			rs = st.executeQuery(sql);</div><div class="line">			//遍历结果集</div><div class="line">			while(rs.next())&#123;</div><div class="line">				System.out.println(rs.getInt(&quot;id&quot;));</div><div class="line">				System.out.println(rs.getString(&quot;name&quot;));</div><div class="line">				System.out.println(rs.getInt(&quot;age&quot;));</div><div class="line">				System.out.println(rs.getString(&quot;Sdept&quot;));</div><div class="line">				</div><div class="line">			&#125;</div><div class="line">			/*</div><div class="line">			//插入数据</div><div class="line">			String insert = &quot;INSERT INTO Student(id,name,age,Sdept) VALUES(?,?,?,?)&quot;;</div><div class="line">			st2 = conn.prepareStatement(insert);</div><div class="line">			st2.setInt(1,3);</div><div class="line">			st2.setString(2, &quot;ccc&quot;);</div><div class="line">			st2.setInt(3,19);</div><div class="line">			st2.setString(4,&quot;CCC&quot;);</div><div class="line">			int num = st2.executeUpdate();</div><div class="line">			if(num&gt;0)System.out.println(&quot;插入成功！&quot;);</div><div class="line">			*/</div><div class="line">		&#125; catch (ClassNotFoundException e) &#123;</div><div class="line">			System.err.println(&quot;数据库驱动失败！&quot;);</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; catch (SQLException e) &#123;</div><div class="line">			System.err.println(&quot;数据库连接失败！&quot;);</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;finally&#123;</div><div class="line">			</div><div class="line">			/*</div><div class="line">			 	从小到大，依次关闭与数据库所有连接，并释放内存</div><div class="line">			 */</div><div class="line">			 </div><div class="line">			if(rs!=null)&#123;</div><div class="line">				try &#123;</div><div class="line">					rs.close();</div><div class="line">				&#125; catch (SQLException e) &#123;</div><div class="line">					// TODO Auto-generated catch block</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			rs=null;</div><div class="line">			if(st!=null)&#123;</div><div class="line">				try &#123;</div><div class="line">					st.close();</div><div class="line">				&#125; catch (SQLException e) &#123;</div><div class="line">					// TODO Auto-generated catch block</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			st=null;</div><div class="line">			if(conn!=null)&#123;</div><div class="line">				try &#123;</div><div class="line">					conn.close();</div><div class="line">				&#125; catch (SQLException e) &#123;</div><div class="line">					// TODO Auto-generated catch block</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			conn=null;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>配置文件是：my.properties<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">className=com.mysql.jdbc.Driver</div><div class="line">url=jdbc:mysql://localhost:3306/db</div><div class="line">user=root</div><div class="line">password=root</div></pre></td></tr></table></figure>
+<p><font size="5"><b>注意事项：</b></font></p>
+<ol><br>    <li>创建驱动的时候有两种方式：<br><br>      DriverManager.registerDriver(new com.mysql.jdbc.Driver());<br><br>      Class.forName(“com.mysql.jdbc.Driver”);<br><br>    创建驱动的时候务必使用反射技术，即第二种方式，因为在Driver类的源码中有段静态代码域就已经new 了一个驱动，如果使用第一种方式就会出现两次驱动的情况；</li><br>    <li>在DriverManager类中重构了获取Connection对象的方法，在传值的时候，可以通过URL参数的方式直接传递，但通常都是直接按三个方式传递，getConnection(String url, String user, String password)</li><br>    <li>在开发过程中数据库的驱动，以及配置文件的加载都只需要执行一次就够了，所以我们可以将其放置在静态代码块中执行</li><br>    <li>在创建链接、获取Statement对象以及结果集之后，要确保将链接关闭；按顺序关，以防万一，可以直接在finally块中关闭，且为了防止出现空指针异常，要关闭不为空的连接所以就应当先进行判断</li><br>    <li>在开发过程中导包的时候，务必导入sun公司API中的响应的包，即java.sql和javax.sql，中的否则在我们使用其他的数据库的时候程序 就跑不了了</li><br>    <li>Statement对象中，查询数据最好使用executeQuery方法，虽然execute方法也支持，但是该方法返回值是一个Boolean对象，遍历结果的时候还要进行判断，使代码过于繁琐</li><br>    <li>在以上程序我使用的是Statement对象执行SQL语句，但是实际开发中最好使用PreparedStatement对象</li><br>    <li>Statement和PreparedStatement的区别：<br><br>    a.PreparedStatement是Statement的孩子<br><br>    b.PreparedStatement内部实现了转义sql语句，防止sql的注入问题<br><br>    c.PreparedStatement会对sql语句进行预编译，以减轻数据库服务器的压力</li><br></ol>
 
       
     </div>
@@ -475,11 +470,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
+            <a href="/tags/JDBC/" rel="tag"><i class="fa fa-tag"></i> JDBC</a>
           
-            <a href="/tags/github/" rel="tag"><i class="fa fa-tag"></i> github</a>
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
           
-            <a href="/tags/Error/" rel="tag"><i class="fa fa-tag"></i> Error</a>
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
         </div>
       
@@ -492,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/27/second/" rel="next" title="首战告捷">
-                <i class="fa fa-chevron-left"></i> 首战告捷
+              <a href="/2017/11/08/mysql的安装与配置/" rel="next" title="mysql的安装与配置">
+                <i class="fa fa-chevron-left"></i> mysql的安装与配置
               </a>
             
           </div>
@@ -501,10 +496,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/29/third/" rel="prev" title="next">
-                next <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -581,17 +572,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/touxiang.jpg"
@@ -671,22 +653,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">部署时出现的错误</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
