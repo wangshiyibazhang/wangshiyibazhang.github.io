@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jvm,GC," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="&amp;lt;一&amp;gt;、判断什么是垃圾（对象无引用）">
+<meta name="keywords" content="jvm,GC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM的垃圾回收机制">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/JVM-SystemGC/index.html">
+<meta property="og:site_name" content="王氏一巴掌">
+<meta property="og:description" content="&amp;lt;一&amp;gt;、判断什么是垃圾（对象无引用）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ox8t0ws1t.bkt.clouddn.com/image/JVM/CMS%E6%94%B6%E9%9B%86%E5%99%A8%E8%BF%90%E8%A1%8C%E5%9B%BE.PNG">
+<meta property="og:updated_time" content="2018-05-17T14:16:10.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM的垃圾回收机制">
+<meta name="twitter:description" content="&amp;lt;一&amp;gt;、判断什么是垃圾（对象无引用）">
+<meta name="twitter:image" content="http://ox8t0ws1t.bkt.clouddn.com/image/JVM/CMS%E6%94%B6%E9%9B%86%E5%99%A8%E8%BF%90%E8%A1%8C%E5%9B%BE.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/16/JVM-SystemGC/"/>
+
+
+
+
+
+
+  <title>JVM的垃圾回收机制 | 王氏一巴掌</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://github.com/wangshiyibazhang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王氏一巴掌</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生而为人，好好活着</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            留言
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/JVM-SystemGC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一巴掌">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王氏一巴掌">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JVM的垃圾回收机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T21:28:04+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1>&lt;一&gt;、判断什么是垃圾（对象无引用）</h1>
+
+<a id="more"></a>
+<p></p><h4> a.程序计数法</h4><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;给对象添加一个引用计数器，每当该对象被引用一次，该计数器的值就加1，当引用失效时 该值就减1；所以当该对象计数器的值为0时，表示对象无引用，对其进行垃圾回收<br> <br><br><strong>缺点</strong>：在JVM中，对象之间往往是循环引用的，即使对象不再被访问，但程序计数器的值还是不会为0；因此该方法并不适用于JVM的垃圾回收中。<p></p>
+<p></p><h4>b.根搜索法</h4><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过一系列名为“GC Roots”的对象为起始点，从这些节点向下搜索，在搜索所走过的路径称为引用链；当一个对象到“GC Roots”没有任何引用链相连时，该对象不可用。<br><br><strong>“GC Roots的类型”</strong>：<br><br>&nbsp;&nbsp;&nbsp;&nbsp;(1)、虚拟机栈中的引用对象<br><br>&nbsp;&nbsp;&nbsp;&nbsp;(2)、方法区中类静态属性引用对象<br><br>&nbsp;&nbsp;&nbsp;&nbsp;(3)、方法区中常量引用对象<br><p></p>
+<p>–</p>
+<ul><br>    <li>经过以上的算法之后，可以得到不可用对象，这些对象处于<b>“待回收”</b>状态，但是也不一定非回收不可。</li><br>    <li>如果要将对象彻底回收，就需要执行该对象的finalize()方法，且该方法只能被系统调用一次，当进行第二次回收时JVM直接进行回收，不会再调用该方法</li><br>    <li>在系统执行finalize()方法的时候，如果对象将其自身的引用与引用链上的任何对象进行关联，该对象就会躲过一次回收。</li><br></ul><br><strong>注意</strong>：如果该对象没有覆盖finalize()方法或者已经调用过该方法就不会再进行第二次调用。<br><br><br><br>–<br><br>引用类型：<br><ol><br>    <li>Strong Refrence（强引用）：始终存在–&gt;Object obj = new Object();</li><br>    <li>Soft Refrence（软引用）：内存溢出前被回收</li><br>    <li>Weak Refrence（弱引用）：下一次回收前被回收</li><br>    <li>Phantom Refrence（虚引用）：被回收前通知一下</li><br></ol><br><br>–<br><br>在永久代中也会进行垃圾回收，主要回收对象是：<b>废弃常量和无用类</b><br><br><b><u>无用类</u></b>：<br><br><ul><br>    <li>所有实例被回收的类</li><br>    <li>加载该类的ClassLoader已经被回收</li><br>    <li>无任何地方有该类的引用</li><br></ul><br><h1>&lt;二&gt;垃圾收集器及其执行原理</h1><br><h4>1.垃圾收集算法</h4><br><h6>a.标记-清除算法</h6><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>原理</i></b>：在一段内存片中，先标记可用回收对象，然后清除<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>缺点</i></b>：产生大量空间碎片，效率低<br><h6>b.复制算法</h6><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>原理</i></b>：将内存划分为大小相等的两块，每次使用一块，使用完以后将存活对象复制到另一块<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>优点</i></b>：无空间碎片<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>缺点</i></b>：内存减小，增加代价<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>注意</i></b>：该算法针对朝生夕死的对象比较有效，所以常应用于<b>新生代</b><br><h6>c.标记-整理算法</h6><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>原理</i></b>：先将对象进行标记，然后将标记对象移向一边，再清除边界<br><br><h6>d.分代收集算法</h6><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><i>原理</i></b>：将对象分为<b>新生代和老年代</b>，新生代使用<b>复制算法</b>，老年代使用<b>标记-整理和标记清除算法</b><br><h4>2.垃圾收集器</h4><br><h6>Serial(新生代)和Serial Old(老年代)收集器（串行GC）</h6><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JDK1.3之前唯一新生代收集器(Serial)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单线程垃圾回收，在其进行垃圾回收的时候必须暂停其他所有工作的线程（stop the world）,一般是在client模式下进行的；<i>在单线程下比其他收集器简单高效</i>，可与CMS收集器搭配使用<br><br><br><h6>ParNew(新生代)收集器（并行GC）</h6><br>&nbsp;&nbsp;&nbsp;&nbsp;JDK1.5时，使用该收集器与CMS收集器搭配使用<br><br>&nbsp;&nbsp;&nbsp;&nbsp;多线程版的Serial收集器，可在Server模式下使用，可与CMS收集器搭配使用<br><br><br><h6>Parallel Scavenge(新生代)和Parallel Old(老年代)收集器</h6><br>&nbsp;&nbsp;&nbsp;&nbsp;该收集器专注于控制吞吐量（CPU运行代码时间与CPU总消耗时间的比值）<br><br><em> Paralle Old使用<b>标记-整理算法</b><br>
+</em>吞吐量收集器强强组合<br><br>-XX:MaxGCPauseMillis（控制最大垃圾收集停顿时间参数）<br><br>-XX:GCTimeRatio（设置吞吐量大小，取值0-100）<br><br><h6>CMS(老年代)收集器（并发GC）</h6><br>&nbsp;&nbsp;&nbsp;&nbsp;该收集器专注于最大限度的降低回收停顿时间，使用的收集算法是<b>标记-清除算法</b>，整个收集分为以下四个步骤(根搜索算法)：<br><br><ol><br>    <li><b><i>初始标记：</i></b>标记<b>引用链</b>直接关联到的对象</li><br>    <li><b><i>并发标记：</i></b>引用链连接过程</li><br>    <li><b><i>重新标记：</i></b>修正并发标记期间因为用户的操作产生变动的对象的标记记录</li><br>    <li><b><i>并发清除：</i></b>清除无用对象</li><br></ol><br><br><br><img src="http://ox8t0ws1t.bkt.clouddn.com/image/JVM/CMS%E6%94%B6%E9%9B%86%E5%99%A8%E8%BF%90%E8%A1%8C%E5%9B%BE.PNG" alt=""><br><br><br>缺点：<br><ul><br>    <li>对CPU资源敏感，默认回收线程是(CPU数量+3)/4，在4个CPU以上占用25%以下CPU资源，但是当CPU少于4个时用户会很明显的感觉到运行速度的减慢</li><br>    <li>无法收集浮动垃圾，即在CMS清理阶段还会有垃圾产生，但是CMS不会对此时产生的垃圾继续清理</li><br>    <li>由于该收集器是基于<b>标记-清除算法</b>，所以会产生大量的空间碎片，针对该问题<b><i>CMS提供了-XX:UseCMSCompactAtFullCollection开关参数，进行空间碎片整理</i></b></li><br></ul>
+
+<p></p><h6>G1收集器</h6><br>应用于JDK1.6之后版本<p></p>
+<ul><br>    <li>基于<b>标记-整理算法</b>实现，不会产生大量的空间碎片</li><br>    <li>可以及其精确的控制停顿时间，做到垃圾的实时回收</li><br>    <li>该收集器贯穿于整个java堆，不再区分新生代和老年代</li><br>    <li>在标记-整理算法条件下，优先收集垃圾最多的一个区域</li><br></ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，小菜鸡感谢您的支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="一巴掌 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+    <div>
+	  
+	    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------the artical is over
+            <i class="fa fa-paw"></i>
+            thank your readed-------------
+        </div>
+    
+</div>
+	  
+    </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jvm/" rel="tag"><i class="fa fa-tag"></i> jvm</a>
+          
+            <a href="/tags/GC/" rel="tag"><i class="fa fa-tag"></i> GC</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/17/hanoiTower/" rel="next" title="汉诺塔问题">
+                <i class="fa fa-chevron-left"></i> 汉诺塔问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE0NS83Njk0"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/touxiang.jpg"
+               alt="一巴掌" />
+          <p class="site-author-name" itemprop="name">一巴掌</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wangsrbus.cn" title="wangsrbus的博客" target="_blank">wangsrbus的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://aluckycoder.github.io" title="aluckycoder的博客" target="_blank">aluckycoder的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text"><一>、判断什么是垃圾（对象无引用）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.1.</span> <span class="nav-text"> a.程序计数法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">b.根搜索法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text"><二>垃圾收集器及其执行原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1.垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.1.0.1.</span> <span class="nav-text">a.标记-清除算法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.1.0.2.</span> <span class="nav-text">b.复制算法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.1.0.3.</span> <span class="nav-text">c.标记-整理算法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.1.0.4.</span> <span class="nav-text">d.分代收集算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">2.垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.2.0.1.</span> <span class="nav-text">Serial(新生代)和Serial Old(老年代)收集器（串行GC）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.2.0.2.</span> <span class="nav-text">ParNew(新生代)收集器（并行GC）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.2.0.3.</span> <span class="nav-text">Parallel Scavenge(新生代)和Parallel Old(老年代)收集器</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.2.0.4.</span> <span class="nav-text">CMS(老年代)收集器（并发GC）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">2.0.0.2.0.5.</span> <span class="nav-text">G1收集器</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy;  Wed Sep 27 2017 08:00:00 GMT+0800 (台北标准时间) - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一巴掌</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+
+<div class="powered-by">
+  
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+<div class="theme-info">
+   
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.2"></script>
+
+
+  
+
+  
+   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+   </script>
+   <script type="text/javascript" src="/js/src/love.js"></script>
+  
+</body>
+</html>
