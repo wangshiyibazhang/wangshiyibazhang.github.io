@@ -101,7 +101,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JVM,内存管理,Eden,Survior," />
 
 
 
@@ -117,13 +117,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="王氏一巴掌">
-<meta property="og:url" content="http://yoursite.com/tags/JDBC/index.html">
+<meta name="description" content="原理：对象优先分配在Eden区，当Eden区没有足够的内存的时候，进行一次Minor GC，在第一次GC存活的对象就会进入Survior区，没进行一次Minor GC后，Surior区中存活对象的年龄就加1，当年龄加到一定值（可以通过-XX:MaxTenuringThreshold参数设置）就进入老年代。">
+<meta name="keywords" content="JVM,内存管理,Eden,Survior">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM-内存分配">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/JVM-内存分配/index.html">
 <meta property="og:site_name" content="王氏一巴掌">
+<meta property="og:description" content="原理：对象优先分配在Eden区，当Eden区没有足够的内存的时候，进行一次Minor GC，在第一次GC存活的对象就会进入Survior区，没进行一次Minor GC后，Surior区中存活对象的年龄就加1，当年龄加到一定值（可以通过-XX:MaxTenuringThreshold参数设置）就进入老年代。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-26T18:43:02.962Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="王氏一巴掌">
+<meta name="twitter:title" content="JVM-内存分配">
+<meta name="twitter:description" content="原理：对象优先分配在Eden区，当Eden区没有足够的内存的时候，进行一次Minor GC，在第一次GC存活的对象就会进入Survior区，没进行一次Minor GC后，Surior区中存活对象的年龄就加1，当年龄加到一定值（可以通过-XX:MaxTenuringThreshold参数设置）就进入老年代。">
 
 
 
@@ -152,14 +157,14 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/JDBC/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/27/JVM-内存分配/"/>
 
 
 
 
 
 
-  <title>标签: JDBC | 王氏一巴掌</title>
+  <title>JVM-内存分配 | 王氏一巴掌</title>
   
 
 
@@ -184,7 +189,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
     <a href="https://github.com/wangshiyibazhang"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
 
@@ -299,54 +304,246 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>JDBC<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/JVM-内存分配/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一巴掌">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王氏一巴掌">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/11/09/JDBC/" itemprop="url">
-              
-                <span itemprop="name">JDBC</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">JVM-内存分配</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-09T19:18:45+08:00"
-              content="2017-11-09" >
-          11-09
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T01:52:11+08:00">
+                2018-05-27
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>原理：对象优先分配在Eden区，当Eden区没有足够的内存的时候，进行一次Minor GC，在第一次GC存活的对象就会进入Survior区，没进行一次Minor GC后，Surior区中存活对象的年龄就加1，当年龄加到一定值（可以通过-XX:MaxTenuringThreshold参数设置）就进入老年代。</p>
+</blockquote>
+<a id="more"></a>
+<p><ul><br>    <li>大对象直接进入老年代，即比较大的字符串和长数组，（内存中需要大量连续内存的对象）</li><br>    <li>在Survior区长期存活到一定值的对象也进入老年代</li><br></ul></p>
+<p><hr><br>&gt;<br>内存空间的分配担保机制：</p>
+<ol><br>    <li>在Survior区中，所有年龄相同的对象大小的总和超过Survior空间大小的一半时，年龄大于或等于该年龄的对象直接进入老年代</li><br>    <li>在Eden区的对象在Minor GC的时候全部存活或者在Survior区无法容纳的时候就需要老年代分配担保</li><br></ol>
+
+<blockquote>
+<blockquote>
+<font color="red">因为在每次GC的时候会产生相应的停顿，在数据量较小的时候停顿感不太明显，但是当数据足够大的时候，会明显的体会到停顿，导致访问变慢或者卡顿现象的出现；</font><br><br>因此我们可以做以下优化：<br><font size="4" color="gren"><br><ol><br>    <li>我们可以适当的扩大堆栈空间的大小，已减少垃圾回收次数</li><br>    <li>将垃圾回收的时间指定在凌晨，访问量最小的时候</li><br>    <li>可以通过HandlePromotionFailure=true设置允许担保失败，不会立即进入Full GC</li><br></ol><br></font>
+</blockquote>
+</blockquote>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，小菜鸡感谢您的支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="一巴掌 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+    <div>
+	  
+	    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------the artical is over
+            <i class="fa fa-paw"></i>
+            thank your readed-------------
+        </div>
+    
+</div>
+	  
+    </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
+          
+            <a href="/tags/内存管理/" rel="tag"><i class="fa fa-tag"></i> 内存管理</a>
+          
+            <a href="/tags/Eden/" rel="tag"><i class="fa fa-tag"></i> Eden</a>
+          
+            <a href="/tags/Survior/" rel="tag"><i class="fa fa-tag"></i> Survior</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/16/JVM-SystemGC/" rel="next" title="JVM的垃圾回收机制">
+                <i class="fa fa-chevron-left"></i> JVM的垃圾回收机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -354,6 +551,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMTE0NS83Njk0"></div>
+    
+  </div>
+
 
         </div>
         
@@ -590,10 +793,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
@@ -622,6 +825,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
